@@ -9,6 +9,18 @@ accounts:
   coins:
   - 10000token
   - 100000000stake
+- name: rene
+  coins:
+  - 10000token
+  - 100000000stake
+- name: epicure
+  coins:
+  - 10000token
+  - 100000000stake
+- name: horus
+  coins:
+  - 10000token
+  - 100000000stake
 client:
   openapi:
     path: docs/static/openapi.yml
@@ -19,4 +31,10 @@ faucet:
   - 100000stake
 validators:
 - name: alice
+  bonded: 100000000stake
+- name: rene
+  bonded: 100000000stake
+- name: epicure
+  bonded: 100000000stake
+- name: horus
   bonded: 100000000stake

@@ -51,3 +51,11 @@ func (k Keeper) GetAuthority() string {
 func (k Keeper) Logger() log.Logger {
 	return k.logger.With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
+
+func (k Keeper) IsProposer(ctx sdk.Context) bool {
+	proposer := ctx.BlockHeader().ProposerAddress
+
+	currentValidator := k.authority
+
+	return sdk.AccAddress(proposer).Equals(sdk.AccAddress(currentValidator))
+}
