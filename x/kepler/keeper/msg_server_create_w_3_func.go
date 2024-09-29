@@ -10,8 +10,15 @@ import (
 func (k msgServer) CreateW3Func(goCtx context.Context, msg *types.MsgCreateW3Func) (*types.MsgCreateW3FuncResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	var w3Func = types.W3Func{
+		Creator: msg.Creator,
+		Cond:    msg.Cond,
+		Code:    msg.Code,
+	}
 
-	return &types.MsgCreateW3FuncResponse{}, nil
+	id := k.AppendW3Func(ctx, w3Func)
+
+	return &types.MsgCreateW3FuncResponse{
+		Id: id,
+	}, nil
 }

@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package kepler.kepler;
 
 import "amino/amino.proto";
@@ -6,25 +7,41 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "kepler/kepler/params.proto";
+import "kepler/kepler/w_3_func.proto";
 
 option go_package = "github.com/devdammit/kepler/x/kepler/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/devdammit/kepler/kepler/params";
+  
+  }
+  
+  // Queries a list of ListW3Func items.
+  rpc ListW3Func (QueryListW3FuncRequest) returns (QueryListW3FuncResponse) {
+    option (google.api.http).get = "/devdammit/kepler/kepler/list_w_3_func";
+
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
-  Params params = 1 [
-    (gogoproto.nullable) = false,
-    (amino.dont_omitempty) = true
-  ];
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
 }
+
+message QueryListW3FuncRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryListW3FuncResponse {
+  W3Func                                 w3Func     = 1;
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

@@ -17,6 +17,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Use:       "params",
 					Short:     "Shows the parameters of the module",
 				},
+				{
+					RpcMethod: "ListW3Func",
+					Use:       "list-w3func",
+					Short:     "Query list-w3func",
+				},
+
 				// this line is used by ignite scaffolding # autocli/query
 			},
 		},
@@ -30,7 +36,7 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 				},
 				{
 					RpcMethod:      "CreateW3Func",
-					Use:            "create-w-3-func [cond] [code]",
+					Use:            "create-w3func [cond] [code]",
 					Short:          "Send a create-w3func tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "cond"}, {ProtoField: "code"}},
 				},
