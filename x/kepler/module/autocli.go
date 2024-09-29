@@ -28,6 +28,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					RpcMethod: "UpdateParams",
 					Skip:      true, // skipped because authority gated
 				},
+				{
+					RpcMethod:      "CreateW3Func",
+					Use:            "create-w-3-func [cond] [code]",
+					Short:          "Send a create-w3func tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "cond"}, {ProtoField: "code"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},
