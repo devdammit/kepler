@@ -153,6 +153,14 @@ func (am AppModule) BeginBlock(_ context.Context) error {
 // The end block implementation is optional.
 func (am AppModule) EndBlock(ctx context.Context) error {
 	am.keeper.Logger().With("module", "x/kepler").Debug("end block")
+
+	sctx := sdk.UnwrapSDKContext(ctx)
+
+	err := am.keeper.ExecuteActiveW3Func(sctx)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 

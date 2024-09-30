@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"fmt"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/devdammit/kepler/x/kepler/types"
@@ -15,6 +16,8 @@ func (k msgServer) CreateW3Func(goCtx context.Context, msg *types.MsgCreateW3Fun
 		Cond:    msg.Cond,
 		Code:    msg.Code,
 	}
+
+	fmt.Println("w3Func: ", w3Func)
 
 	id := k.AppendW3Func(ctx, w3Func)
 

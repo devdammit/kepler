@@ -13,13 +13,13 @@ import (
 )
 
 var (
-	md_W3Func                   protoreflect.MessageDescriptor
-	fd_W3Func_creator           protoreflect.FieldDescriptor
-	fd_W3Func_cond              protoreflect.FieldDescriptor
-	fd_W3Func_code              protoreflect.FieldDescriptor
-	fd_W3Func_counter           protoreflect.FieldDescriptor
-	fd_W3Func_lastExecutedBlock protoreflect.FieldDescriptor
-	fd_W3Func_id                protoreflect.FieldDescriptor
+	md_W3Func            protoreflect.MessageDescriptor
+	fd_W3Func_creator    protoreflect.FieldDescriptor
+	fd_W3Func_cond       protoreflect.FieldDescriptor
+	fd_W3Func_code       protoreflect.FieldDescriptor
+	fd_W3Func_counter    protoreflect.FieldDescriptor
+	fd_W3Func_executedAt protoreflect.FieldDescriptor
+	fd_W3Func_id         protoreflect.FieldDescriptor
 )
 
 func init() {
@@ -29,7 +29,7 @@ func init() {
 	fd_W3Func_cond = md_W3Func.Fields().ByName("cond")
 	fd_W3Func_code = md_W3Func.Fields().ByName("code")
 	fd_W3Func_counter = md_W3Func.Fields().ByName("counter")
-	fd_W3Func_lastExecutedBlock = md_W3Func.Fields().ByName("lastExecutedBlock")
+	fd_W3Func_executedAt = md_W3Func.Fields().ByName("executedAt")
 	fd_W3Func_id = md_W3Func.Fields().ByName("id")
 }
 
@@ -122,9 +122,9 @@ func (x *fastReflection_W3Func) Range(f func(protoreflect.FieldDescriptor, proto
 			return
 		}
 	}
-	if x.LastExecutedBlock != uint64(0) {
-		value := protoreflect.ValueOfUint64(x.LastExecutedBlock)
-		if !f(fd_W3Func_lastExecutedBlock, value) {
+	if x.ExecutedAt != "" {
+		value := protoreflect.ValueOfString(x.ExecutedAt)
+		if !f(fd_W3Func_executedAt, value) {
 			return
 		}
 	}
@@ -157,8 +157,8 @@ func (x *fastReflection_W3Func) Has(fd protoreflect.FieldDescriptor) bool {
 		return x.Code != ""
 	case "kepler.kepler.W3Func.counter":
 		return x.Counter != uint64(0)
-	case "kepler.kepler.W3Func.lastExecutedBlock":
-		return x.LastExecutedBlock != uint64(0)
+	case "kepler.kepler.W3Func.executedAt":
+		return x.ExecutedAt != ""
 	case "kepler.kepler.W3Func.id":
 		return x.Id != uint64(0)
 	default:
@@ -185,8 +185,8 @@ func (x *fastReflection_W3Func) Clear(fd protoreflect.FieldDescriptor) {
 		x.Code = ""
 	case "kepler.kepler.W3Func.counter":
 		x.Counter = uint64(0)
-	case "kepler.kepler.W3Func.lastExecutedBlock":
-		x.LastExecutedBlock = uint64(0)
+	case "kepler.kepler.W3Func.executedAt":
+		x.ExecutedAt = ""
 	case "kepler.kepler.W3Func.id":
 		x.Id = uint64(0)
 	default:
@@ -217,9 +217,9 @@ func (x *fastReflection_W3Func) Get(descriptor protoreflect.FieldDescriptor) pro
 	case "kepler.kepler.W3Func.counter":
 		value := x.Counter
 		return protoreflect.ValueOfUint64(value)
-	case "kepler.kepler.W3Func.lastExecutedBlock":
-		value := x.LastExecutedBlock
-		return protoreflect.ValueOfUint64(value)
+	case "kepler.kepler.W3Func.executedAt":
+		value := x.ExecutedAt
+		return protoreflect.ValueOfString(value)
 	case "kepler.kepler.W3Func.id":
 		value := x.Id
 		return protoreflect.ValueOfUint64(value)
@@ -251,8 +251,8 @@ func (x *fastReflection_W3Func) Set(fd protoreflect.FieldDescriptor, value proto
 		x.Code = value.Interface().(string)
 	case "kepler.kepler.W3Func.counter":
 		x.Counter = value.Uint()
-	case "kepler.kepler.W3Func.lastExecutedBlock":
-		x.LastExecutedBlock = value.Uint()
+	case "kepler.kepler.W3Func.executedAt":
+		x.ExecutedAt = value.Interface().(string)
 	case "kepler.kepler.W3Func.id":
 		x.Id = value.Uint()
 	default:
@@ -283,8 +283,8 @@ func (x *fastReflection_W3Func) Mutable(fd protoreflect.FieldDescriptor) protore
 		panic(fmt.Errorf("field code of message kepler.kepler.W3Func is not mutable"))
 	case "kepler.kepler.W3Func.counter":
 		panic(fmt.Errorf("field counter of message kepler.kepler.W3Func is not mutable"))
-	case "kepler.kepler.W3Func.lastExecutedBlock":
-		panic(fmt.Errorf("field lastExecutedBlock of message kepler.kepler.W3Func is not mutable"))
+	case "kepler.kepler.W3Func.executedAt":
+		panic(fmt.Errorf("field executedAt of message kepler.kepler.W3Func is not mutable"))
 	case "kepler.kepler.W3Func.id":
 		panic(fmt.Errorf("field id of message kepler.kepler.W3Func is not mutable"))
 	default:
@@ -308,8 +308,8 @@ func (x *fastReflection_W3Func) NewField(fd protoreflect.FieldDescriptor) protor
 		return protoreflect.ValueOfString("")
 	case "kepler.kepler.W3Func.counter":
 		return protoreflect.ValueOfUint64(uint64(0))
-	case "kepler.kepler.W3Func.lastExecutedBlock":
-		return protoreflect.ValueOfUint64(uint64(0))
+	case "kepler.kepler.W3Func.executedAt":
+		return protoreflect.ValueOfString("")
 	case "kepler.kepler.W3Func.id":
 		return protoreflect.ValueOfUint64(uint64(0))
 	default:
@@ -396,8 +396,9 @@ func (x *fastReflection_W3Func) ProtoMethods() *protoiface.Methods {
 		if x.Counter != 0 {
 			n += 1 + runtime.Sov(uint64(x.Counter))
 		}
-		if x.LastExecutedBlock != 0 {
-			n += 1 + runtime.Sov(uint64(x.LastExecutedBlock))
+		l = len(x.ExecutedAt)
+		if l > 0 {
+			n += 1 + l + runtime.Sov(uint64(l))
 		}
 		if x.Id != 0 {
 			n += 1 + runtime.Sov(uint64(x.Id))
@@ -436,10 +437,12 @@ func (x *fastReflection_W3Func) ProtoMethods() *protoiface.Methods {
 			i--
 			dAtA[i] = 0x30
 		}
-		if x.LastExecutedBlock != 0 {
-			i = runtime.EncodeVarint(dAtA, i, uint64(x.LastExecutedBlock))
+		if len(x.ExecutedAt) > 0 {
+			i -= len(x.ExecutedAt)
+			copy(dAtA[i:], x.ExecutedAt)
+			i = runtime.EncodeVarint(dAtA, i, uint64(len(x.ExecutedAt)))
 			i--
-			dAtA[i] = 0x28
+			dAtA[i] = 0x2a
 		}
 		if x.Counter != 0 {
 			i = runtime.EncodeVarint(dAtA, i, uint64(x.Counter))
@@ -632,10 +635,10 @@ func (x *fastReflection_W3Func) ProtoMethods() *protoiface.Methods {
 					}
 				}
 			case 5:
-				if wireType != 0 {
-					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field LastExecutedBlock", wireType)
+				if wireType != 2 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field ExecutedAt", wireType)
 				}
-				x.LastExecutedBlock = 0
+				var stringLen uint64
 				for shift := uint(0); ; shift += 7 {
 					if shift >= 64 {
 						return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrIntOverflow
@@ -645,11 +648,24 @@ func (x *fastReflection_W3Func) ProtoMethods() *protoiface.Methods {
 					}
 					b := dAtA[iNdEx]
 					iNdEx++
-					x.LastExecutedBlock |= uint64(b&0x7F) << shift
+					stringLen |= uint64(b&0x7F) << shift
 					if b < 0x80 {
 						break
 					}
 				}
+				intStringLen := int(stringLen)
+				if intStringLen < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				postIndex := iNdEx + intStringLen
+				if postIndex < 0 {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, runtime.ErrInvalidLength
+				}
+				if postIndex > l {
+					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, io.ErrUnexpectedEOF
+				}
+				x.ExecutedAt = string(dAtA[iNdEx:postIndex])
+				iNdEx = postIndex
 			case 6:
 				if wireType != 0 {
 					return protoiface.UnmarshalOutput{NoUnkeyedLiterals: input.NoUnkeyedLiterals, Flags: input.Flags}, fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
@@ -722,12 +738,12 @@ type W3Func struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Creator           string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Cond              string `protobuf:"bytes,2,opt,name=cond,proto3" json:"cond,omitempty"`
-	Code              string `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
-	Counter           uint64 `protobuf:"varint,4,opt,name=counter,proto3" json:"counter,omitempty"`
-	LastExecutedBlock uint64 `protobuf:"varint,5,opt,name=lastExecutedBlock,proto3" json:"lastExecutedBlock,omitempty"`
-	Id                uint64 `protobuf:"varint,6,opt,name=id,proto3" json:"id,omitempty"`
+	Creator    string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Cond       string `protobuf:"bytes,2,opt,name=cond,proto3" json:"cond,omitempty"`
+	Code       string `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`
+	Counter    uint64 `protobuf:"varint,4,opt,name=counter,proto3" json:"counter,omitempty"`
+	ExecutedAt string `protobuf:"bytes,5,opt,name=executedAt,proto3" json:"executedAt,omitempty"`
+	Id         uint64 `protobuf:"varint,6,opt,name=id,proto3" json:"id,omitempty"`
 }
 
 func (x *W3Func) Reset() {
@@ -778,11 +794,11 @@ func (x *W3Func) GetCounter() uint64 {
 	return 0
 }
 
-func (x *W3Func) GetLastExecutedBlock() uint64 {
+func (x *W3Func) GetExecutedAt() string {
 	if x != nil {
-		return x.LastExecutedBlock
+		return x.ExecutedAt
 	}
-	return 0
+	return ""
 }
 
 func (x *W3Func) GetId() uint64 {
@@ -797,29 +813,28 @@ var File_kepler_kepler_w_3_func_proto protoreflect.FileDescriptor
 var file_kepler_kepler_w_3_func_proto_rawDesc = []byte{
 	0x0a, 0x1c, 0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x2f, 0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x2f,
 	0x77, 0x5f, 0x33, 0x5f, 0x66, 0x75, 0x6e, 0x63, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0d,
-	0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x2e, 0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x22, 0xa2, 0x01,
+	0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x2e, 0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x22, 0x94, 0x01,
 	0x0a, 0x06, 0x57, 0x33, 0x46, 0x75, 0x6e, 0x63, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65, 0x61,
 	0x74, 0x6f, 0x72, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61, 0x74,
 	0x6f, 0x72, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x6e, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x04, 0x63, 0x6f, 0x6e, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x18, 0x03,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x63, 0x6f, 0x64, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f,
 	0x75, 0x6e, 0x74, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x04, 0x52, 0x07, 0x63, 0x6f, 0x75,
-	0x6e, 0x74, 0x65, 0x72, 0x12, 0x2c, 0x0a, 0x11, 0x6c, 0x61, 0x73, 0x74, 0x45, 0x78, 0x65, 0x63,
-	0x75, 0x74, 0x65, 0x64, 0x42, 0x6c, 0x6f, 0x63, 0x6b, 0x18, 0x05, 0x20, 0x01, 0x28, 0x04, 0x52,
-	0x11, 0x6c, 0x61, 0x73, 0x74, 0x45, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x64, 0x42, 0x6c, 0x6f,
-	0x63, 0x6b, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02,
-	0x69, 0x64, 0x42, 0xa4, 0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x6b, 0x65, 0x70, 0x6c, 0x65,
-	0x72, 0x2e, 0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x42, 0x0b, 0x57, 0x33, 0x46, 0x75, 0x6e, 0x63,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x2d, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x65, 0x76, 0x64, 0x61, 0x6d, 0x6d, 0x69, 0x74, 0x2f, 0x6b, 0x65,
-	0x70, 0x6c, 0x65, 0x72, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x2f,
-	0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0xa2, 0x02, 0x03, 0x4b, 0x4b, 0x58, 0xaa, 0x02, 0x0d, 0x4b,
-	0x65, 0x70, 0x6c, 0x65, 0x72, 0x2e, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0xca, 0x02, 0x0d, 0x4b,
-	0x65, 0x70, 0x6c, 0x65, 0x72, 0x5c, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0xe2, 0x02, 0x19, 0x4b,
-	0x65, 0x70, 0x6c, 0x65, 0x72, 0x5c, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x5c, 0x47, 0x50, 0x42,
-	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0e, 0x4b, 0x65, 0x70, 0x6c, 0x65,
-	0x72, 0x3a, 0x3a, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x6e, 0x74, 0x65, 0x72, 0x12, 0x1e, 0x0a, 0x0a, 0x65, 0x78, 0x65, 0x63, 0x75, 0x74, 0x65, 0x64,
+	0x41, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x65, 0x78, 0x65, 0x63, 0x75, 0x74,
+	0x65, 0x64, 0x41, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x06, 0x20, 0x01, 0x28, 0x04,
+	0x52, 0x02, 0x69, 0x64, 0x42, 0xa4, 0x01, 0x0a, 0x11, 0x63, 0x6f, 0x6d, 0x2e, 0x6b, 0x65, 0x70,
+	0x6c, 0x65, 0x72, 0x2e, 0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x42, 0x0b, 0x57, 0x33, 0x46, 0x75,
+	0x6e, 0x63, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x2d, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x65, 0x76, 0x64, 0x61, 0x6d, 0x6d, 0x69, 0x74, 0x2f,
+	0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x6b, 0x65, 0x70, 0x6c, 0x65,
+	0x72, 0x2f, 0x6b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0xa2, 0x02, 0x03, 0x4b, 0x4b, 0x58, 0xaa, 0x02,
+	0x0d, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x2e, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0xca, 0x02,
+	0x0d, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x5c, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0xe2, 0x02,
+	0x19, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x5c, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x5c, 0x47,
+	0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0e, 0x4b, 0x65, 0x70,
+	0x6c, 0x65, 0x72, 0x3a, 0x3a, 0x4b, 0x65, 0x70, 0x6c, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (

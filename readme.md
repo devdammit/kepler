@@ -1,5 +1,5 @@
-# kepler
-**kepler** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
+# Kepler
+Kepler was created for educational purposes, as part of the development of the Cosmos SDK and [Ignite CLI](https://ignite.com/cli) to test a hypothesis related to web 3 functions
 
 ## Get started
 

@@ -4,11 +4,11 @@ package kepler.kepler;
 option go_package = "github.com/devdammit/kepler/x/kepler/types";
 
 message W3Func {
-  
+
   string creator = 1; 
   string cond = 2; 
   string code = 3; 
   uint64 counter = 4; 
-  uint64 lastExecutedBlock = 5; 
+  string executedAt = 5;
   uint64 id = 6; 
 }

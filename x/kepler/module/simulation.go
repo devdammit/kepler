@@ -27,6 +27,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgCreateW3Func int = 100
 
+	opWeightMsgW3FuncExecuted = "op_weight_msg_w_3_func_executed"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgW3FuncExecuted int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -61,6 +65,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		keplersimulation.SimulateMsgCreateW3Func(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgW3FuncExecuted int
+	simState.AppParams.GetOrGenerate(opWeightMsgW3FuncExecuted, &weightMsgW3FuncExecuted, nil,
+		func(_ *rand.Rand) {
+			weightMsgW3FuncExecuted = defaultWeightMsgW3FuncExecuted
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgW3FuncExecuted,
+		keplersimulation.SimulateMsgW3FuncExecuted(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -74,6 +89,14 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCreateW3Func,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				keplersimulation.SimulateMsgCreateW3Func(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgW3FuncExecuted,
+			defaultWeightMsgW3FuncExecuted,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				keplersimulation.SimulateMsgW3FuncExecuted(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

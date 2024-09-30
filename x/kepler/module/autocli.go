@@ -40,6 +40,12 @@ func (am AppModule) AutoCLIOptions() *autocliv1.ModuleOptions {
 					Short:          "Send a create-w3func tx",
 					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "cond"}, {ProtoField: "code"}},
 				},
+				{
+					RpcMethod:      "W3FuncExecuted",
+					Use:            "w-3-func-executed [id] [executed-at]",
+					Short:          "Send a w3func-executed tx",
+					PositionalArgs: []*autocliv1.PositionalArgDescriptor{{ProtoField: "id"}, {ProtoField: "executedAt"}},
+				},
 				// this line is used by ignite scaffolding # autocli/tx
 			},
 		},

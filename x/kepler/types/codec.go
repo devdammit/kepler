@@ -11,6 +11,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateW3Func{},
 	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgW3FuncExecuted{},
+	)
 	// this line is used by starport scaffolding # 3
 
 	registry.RegisterImplementations((*sdk.Msg)(nil),
